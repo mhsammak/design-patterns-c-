@@ -3,17 +3,7 @@
 // Converts the interface of a class into another interface clients expect.
 // Adapter lets classes work together that couldn't otherwise because of 
 // incompatible interfaces.
-//
-// Applications
-// ------------
-// 1. You want to use an existing class, and its interface does not match the
-// one you need.
-// 2. you want to create a reusable class that cooperates with unrelated or 
-// unforeseen classes, that is, classes that don't necessarily have compatible
-// interfaces.
-// 3. (object adapter only) you need to use several existing subclasses, but
-// it's unpractical to adapt their interface by subclassing every one. An 
-// object adapter can adapt the interface of its parent class.
+
 
 #include <iostream>
 using namespace std;
@@ -29,13 +19,10 @@ public:
     double x;
     double y;
 
-    Point(double xCord, double yCord) {
-        x = xCord;
-        y = yCord;
-    }
+    Point(double xCord, double yCord): x(xCord), y(yCord) { }
 };
 
-// An abstract class to manipulate Shapes in the screen. For example
+// An abstract class to manipulate Shapes in the screen, for example,
 // dragging, resizing, etc. Extended by subclasses to manipulate
 // different kinds of Shapes like LinesShapes, SquareShapes, etc.
 class Manipulator {
@@ -59,7 +46,8 @@ void LineManipulator::manipulate() {
 // shapes like line in LineShape subclass, square in SquareShape subclass, etc. 
 // For simplicity, the interface has a method drawBoundingBox that takes the 
 // coordinates of top left and bottom right points to draw the bounding box.
-// The getManipulator returns a specific manipulator for specific shape.
+// The getManipulator returns a specific manipulator for specific shape to
+// manipulate that shape.
 class Shape {
 public:
     Shape();
@@ -186,3 +174,14 @@ Manipulator* TextShape2::getManipulator() {
 
 // Now, we can use not only a specific concrete TextView but also its subclasses
 // if any.
+
+// Applications
+// ------------
+// 1. You want to use an existing class, and its interface does not match the
+// one you need.
+// 2. you want to create a reusable class that cooperates with unrelated or 
+// unforeseen classes, that is, classes that don't necessarily have compatible
+// interfaces.
+// 3. (object adapter only) you need to use several existing subclasses, but
+// it's unpractical to adapt their interface by subclassing every one. An 
+// object adapter can adapt the interface of its parent class.
